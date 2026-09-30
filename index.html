@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="One USD Project — one dollar, one sentence, one permanent place in a 100,000-person internet archive.">
+<title>One USD Project</title>
+<style>
+:root{
+  --bg:#07111f;--bg2:#0b1728;--panel:#0e1e33;--panel2:#10243e;
+  --text:#f7fbff;--muted:#9fb2c8;--blue:#4aa9ff;--blue2:#8cdcff;
+  --line:rgba(255,255,255,.11);--green:#9af3b6;--gold:#ffd98a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 12% 2%,rgba(74,169,255,.20),transparent 34rem),
+    radial-gradient(circle at 90% 15%,rgba(140,220,255,.10),transparent 30rem),
+    linear-gradient(180deg,var(--bg),#06101c 70%);
+  line-height:1.55;
+}
+a{color:inherit}.wrap{width:min(1120px,calc(100% - 30px));margin:auto}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:.065em}
+.logo{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(145deg,#46b2ff,#145be4);
+  box-shadow:0 12px 30px rgba(30,116,255,.28);font-size:20px;font-weight:1000
+}
+.nav{display:flex;gap:22px;color:var(--muted);font-size:14px}.nav a{text-decoration:none}
+.hero{min-height:82vh;display:grid;grid-template-columns:1.18fr .82fr;gap:52px;align-items:center;padding:54px 0 76px}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+  background:rgba(255,255,255,.04);border-radius:999px;padding:8px 12px;
+  color:var(--blue2);font-weight:850;font-size:13px;letter-spacing:.09em
+}
+.dotlive{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 16px var(--green)}
+h1{font-size:clamp(48px,8.4vw,94px);line-height:.93;letter-spacing:-.058em;margin:22px 0}
+h1 span{color:var(--blue)}
+.lead{font-size:clamp(19px,2.4vw,25px);color:#d9e8f7;max-width:790px;margin:0 0 24px}
+.micro{color:var(--muted);font-size:14px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{
+  appearance:none;border:0;border-radius:14px;padding:14px 18px;font-weight:900;font-size:15px;
+  text-decoration:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer
+}
+.primary{background:linear-gradient(135deg,var(--blue),#1768ef);color:white;box-shadow:0 12px 34px rgba(23,104,239,.30)}
+.secondary{background:rgba(255,255,255,.06);border:1px solid var(--line);color:white}
+.card{
+  background:linear-gradient(180deg,rgba(16,36,62,.95),rgba(10,24,42,.97));
+  border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 26px 80px rgba(0,0,0,.30)
+}
+.stat-label{text-align:center;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.16em}
+.count{text-align:center;font-size:clamp(48px,7vw,76px);font-weight:1000;letter-spacing:-.055em;margin:4px 0}
+.meter{height:12px;background:#040a12;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue2));width:0}
+.remaining{text-align:center;color:var(--muted);font-size:13px;margin-top:9px}
+.rulebox{margin-top:22px;border-top:1px solid var(--line);padding-top:20px}
+.nomore{text-align:center;font-size:25px;font-weight:950;letter-spacing:-.02em}
+.nomore span{color:var(--gold)}
+section{padding:74px 0}
+h2{font-size:clamp(31px,5vw,54px);line-height:1.04;letter-spacing:-.04em;margin:0 0 14px}
+.sub{color:var(--muted);font-size:18px;max-width:780px;margin:0 0 32px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mini{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:20px;padding:22px}
+.num{font-size:12px;font-weight:900;letter-spacing:.14em;color:var(--blue2)}
+.mini h3{font-size:21px;margin:8px 0}.mini p{margin:0;color:var(--muted)}
+.quote{font-size:clamp(28px,4vw,47px);line-height:1.14;letter-spacing:-.03em;margin:14px 0 0}
+.quote span{color:var(--blue2)}
+.archive-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:20px}
+.archive-note{color:var(--muted);font-size:14px}
+.wall{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.slot{border:1px solid var(--line);border-radius:16px;padding:16px;background:rgba(255,255,255,.026);min-height:92px}
+.slot .n{font-weight:950;font-size:18px}
+.slot .s{color:var(--muted);font-size:13px;margin-top:7px}
+.slot.taken{background:linear-gradient(180deg,rgba(74,169,255,.11),rgba(255,255,255,.025))}
+.slot.taken .s{color:var(--green)}
+.join{display:grid;grid-template-columns:1fr .95fr;gap:18px}
+.emailbox{
+  background:#050d18;border:1px solid var(--line);border-radius:16px;padding:16px 17px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:clamp(16px,2.8vw,21px);
+  overflow:auto;white-space:nowrap
+}
+.copy{margin-top:12px;width:100%}
+.steps{display:grid;gap:12px}
+.step{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:16px;padding:15px;background:rgba(255,255,255,.025)}
+.stepnum{width:28px;height:28px;min-width:28px;border-radius:50%;display:grid;place-items:center;background:rgba(74,169,255,.14);color:var(--blue2);font-weight:950}
+.step b{display:block;margin-bottom:2px}.step span{color:var(--muted);font-size:14px}
+.sharebox{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.trust{margin-top:15px;color:var(--muted);font-size:13px}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.rule{border-top:1px solid var(--line);padding:18px 0;display:flex;gap:12px}.tick{color:var(--green);font-weight:1000}
+details{border-top:1px solid var(--line);padding:18px 0}summary{font-weight:850;cursor:pointer}
+details p{color:var(--muted);margin-bottom:0}
+footer{border-top:1px solid var(--line);padding:34px 0 50px;color:var(--muted);font-size:13px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:#0f2239;border:1px solid var(--line);padding:11px 15px;border-radius:999px;font-size:14px;transition:.2s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:860px){
+  .hero,.join{grid-template-columns:1fr}.hero{padding-top:28px;gap:25px}
+  .grid3,.rules{grid-template-columns:1fr}.wall{grid-template-columns:repeat(2,1fr)}
+  .nav{display:none}.card{padding:21px}.archive-head{align-items:start;flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<nav>
+  <div class="brand"><div class="logo">$1</div><span>ONE USD PROJECT</span></div>
+  <div class="nav"><a href="#idea">The idea</a><a href="#archive">Archive</a><a href="#join">Join</a><a href="#faq">FAQ</a></div>
+</nav>
+
+<main class="hero">
+  <div>
+    <div class="kicker"><span class="dotlive"></span> 100,000 PLACES. NO MORE.</div>
+    <h1>One dollar.<br><span>One sentence.</span><br>One place forever.</h1>
+    <p class="lead">
+      A billionaire cannot give $2. A student cannot be pushed behind them.
+      Everyone gets the same rule: <strong>exactly $1 and one sentence worth leaving behind.</strong>
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#join">Claim a participant number</a>
+      <a class="btn secondary" href="#archive">See the first 12 places</a>
+    </div>
+    <p class="micro">No charity. No investment. No product. No promised return. Just a transparent internet experiment.</p>
+  </div>
+
+  <aside class="card">
+    <div class="stat-label">Participants</div>
+    <div class="count"><span id="count">0</span> / 100,000</div>
+    <div class="meter"><div class="fill" id="fill"></div></div>
+    <div class="remaining"><span id="left">100,000</span> participant numbers remain.</div>
+    <div class="rulebox">
+      <div class="nomore">You literally <span>cannot buy more.</span></div>
+      <div class="remaining">Maximum contribution: $1.00 per person.</div>
+    </div>
+  </aside>
+</main>
+</div>
+
+<section id="idea">
+<div class="wrap">
+  <h2>The money is intentionally boring.</h2>
+  <p class="sub">The interesting part is whether 100,000 strangers will voluntarily choose the same tiny rule—and what they decide is worth saying when they only get one sentence.</p>
+
+  <div class="grid3">
+    <div class="mini">
+      <div class="num">01 · PROOF</div>
+      <h3>$1 proves participation</h3>
+      <p>The payment is not meant to be impressive. It is simply proof that you chose to become part of the experiment.</p>
+    </div>
+    <div class="mini">
+      <div class="num">02 · SCARCITY</div>
+      <h3>Your number stays yours</h3>
+      <p>Participant numbers run from #000001 to #100000. They are assigned in payment order and are never sold again.</p>
+    </div>
+    <div class="mini">
+      <div class="num">03 · LEGACY</div>
+      <h3>One sentence only</h3>
+      <p>You get the same space as everyone else. Famous or unknown, rich or broke: one sentence.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <div class="card">
+    <div class="stat-label" style="text-align:left">YOUR ONE QUESTION</div>
+    <div class="quote">“What is one thing you wish you had understood <span>10 years earlier?</span>”</div>
+    <p class="sub" style="margin-top:18px;margin-bottom:0">Answer in one sentence. You can remain anonymous unless you explicitly choose to be named.</p>
+  </div>
+</div>
+</section>
+
+<section id="archive">
+<div class="wrap">
+  <div class="archive-head">
+    <div>
+      <h2>The first 12 places.</h2>
+      <p class="sub" style="margin-bottom:0">No fake participants. A place changes to “Taken” only after a verified $1 payment.</p>
+    </div>
+    <div class="archive-note">Public identity is optional. Participant number is permanent.</div>
+  </div>
+  <div class="wall" id="wall"></div>
+</div>
+</section>
+
+<section id="join">
+<div class="wrap">
+  <h2>Join without trusting a payment link.</h2>
+  <p class="sub">There is intentionally no payment URL here. Open PayPal yourself and type the project email manually.</p>
+
+  <div class="join">
+    <div class="card">
+      <div class="stat-label" style="text-align:left">PAYPAL RECIPIENT</div>
+      <div class="emailbox" id="paypal">oneusdproject@gmail.com</div>
+      <button class="btn primary copy" id="copyEmail" type="button">Copy PayPal email</button>
+
+      <div class="sharebox">
+        <div class="stat-label" style="text-align:left">AFTER YOU JOIN</div>
+        <p class="micro" style="margin-top:8px">If the idea makes you smile, pass the rule to one person.</p>
+        <button class="btn secondary copy" id="copyInvite" type="button">Copy the 1-sentence invite</button>
+      </div>
+
+      <div class="trust">We never ask for passwords, card numbers, OTP codes, or banking credentials.</div>
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="stepnum">1</div><div><b>Open PayPal yourself</b><span>Use the official PayPal app or website you already trust.</span></div></div>
+      <div class="step"><div class="stepnum">2</div><div><b>Send exactly $1 USD</b><span>Recipient: oneusdproject@gmail.com. Please do not send more.</span></div></div>
+      <div class="step"><div class="stepnum">3</div><div><b>Send your one sentence</b><span>Email your sentence to the same address. Your number is assigned after payment verification.</span></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+  <h2>The transparency rules.</h2>
+  <div class="rules">
+    <div class="rule"><span class="tick">✓</span><div><b>Not a charity.</b><br><span class="micro">We do not claim your dollar supports a charitable cause.</span></div></div>
+    <div class="rule"><span class="tick">✓</span><div><b>Not an investment.</b><br><span class="micro">There is no ownership, repayment, profit share, or financial return.</span></div></div>
+    <div class="rule"><span class="tick">✓</span><div><b>No pay-to-rank.</b><br><span class="micro">No one can buy an earlier number or additional visibility.</span></div></div>
+    <div class="rule"><span class="tick">✓</span><div><b>No fake social proof.</b><br><span class="micro">The counter and archive should reflect verified participants only.</span></div></div>
+  </div>
+</div>
+</section>
+
+<section id="faq">
+<div class="wrap">
+  <h2>FAQ</h2>
+  <details open>
+    <summary>What do I receive for $1?</summary>
+    <p>A permanent participant number in the experiment and the option to preserve one sentence in the project archive. There is no product, investment return, or guaranteed material reward.</p>
+  </details>
+  <details>
+    <summary>Why exactly $1?</summary>
+    <p>Because the project is designed so money cannot create status. Everyone follows the same contribution limit.</p>
+  </details>
+  <details>
+    <summary>Why no PayPal link?</summary>
+    <p>So you do not have to trust a payment URL sent by a stranger. Open PayPal independently and type the recipient email yourself.</p>
+  </details>
+  <details>
+    <summary>Will my name be public?</summary>
+    <p>No. The archive can show only your participant number unless you explicitly consent to having your name or sentence attributed publicly.</p>
+  </details>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+  <strong>One USD Project</strong><br>
+  A transparent internet experiment. Not affiliated with or sponsored by PayPal.
+</div>
+</footer>
+
+<div class="toast" id="toast">Copied ✓</div>
+
+<script>
+const PARTICIPANTS = 0; // IMPORTANT: change only after verified participants join.
+
+const count = Math.max(0, Math.min(100000, PARTICIPANTS));
+document.getElementById("count").textContent = count.toLocaleString("en-US");
+document.getElementById("left").textContent = (100000 - count).toLocaleString("en-US");
+document.getElementById("fill").style.width = (count / 100000 * 100) + "%";
+
+const wall = document.getElementById("wall");
+for (let i = 1; i <= 12; i++) {
+  const slot = document.createElement("div");
+  const taken = i <= count;
+  slot.className = "slot" + (taken ? " taken" : "");
+  slot.innerHTML = '<div class="n">#' + String(i).padStart(6,"0") + '</div>' +
+                   '<div class="s">' + (taken ? "Taken · verified participant" : "Open") + '</div>';
+  wall.appendChild(slot);
+}
+
+const toast = document.getElementById("toast");
+function showToast(text){
+  toast.textContent = text || "Copied ✓";
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),1500);
+}
+
+document.getElementById("copyEmail").addEventListener("click", async ()=>{
+  const email = document.getElementById("paypal").textContent.trim();
+  try { await navigator.clipboard.writeText(email); showToast("PayPal email copied ✓"); }
+  catch { window.prompt("Copy this PayPal email:", email); }
+});
+
+document.getElementById("copyInvite").addEventListener("click", async ()=>{
+  const invite = "A billionaire and a student get the same rule here: exactly $1 and one sentence. One USD Project: https://anhhung522-coder.github.io/one-usd-project/";
+  try { await navigator.clipboard.writeText(invite); showToast("Invite copied ✓"); }
+  catch { window.prompt("Copy this invite:", invite); }
+});
+</script>
+</body>
+</html>
